@@ -13,7 +13,7 @@ using System.Data;
 
 
 
-namespace ExampleWebAPI
+namespace WebApplication1
 
 {
 
@@ -27,7 +27,7 @@ namespace ExampleWebAPI
 
             //@"Server=myServerAddress;Database=myDatabase;User Id=MyUsername;Password=myPassword;"
 
-            string ConnString = @"Server=tcp:civapi.database.windows.net,1433;Initial Catalog=civapi;User ID=civ_user;Password=Monday1330;";
+            string ConnString = @"Server=tcp:civapi.database.windows.net,1433;Database=civapi;User ID=civ_user;Password=Monday1330;";
 
             return new SqlConnection(ConnString);
 
