@@ -21,12 +21,13 @@ namespace WebApplication1.Models
     { 
     public int ISBN { get; set; }
     public string title { get; set; }
-    public string borrower { get; set; }
-        public BooksModelBorrowed(int ISBN, string title, string borrower)
+    public BorrowerModel borrower{ get; set; }
+        public BooksModelBorrowed(int ISBN, string title, int id, string surname, string firstname, string DOB)
         {
             this.ISBN = ISBN;
             this.title = title;
-            this.borrower = borrower;
+            this.borrower = new BorrowerModel(id, surname, firstname, DOB);
         }
     }
+
 }

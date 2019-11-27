@@ -21,11 +21,20 @@ namespace WebApplication1.Controllers
             SqlDataReader rdr;
             string query;
             List<BooksModelBorrowed> output = new List<BooksModelBorrowed>();
+            //List<BorrowerModel> output2 = new List<BorrowerModel>();
 
             try
             {
                 conn.Open();
-                query = "select * from Books where borrower is not null";
+
+                query = "select * " +
+                    "from Books " +
+                    "inner join Borrower on Books.Borrower = Borrower.id " +
+                    "where Books.Borrower is not null";
+                //query = "select Books.ISBN, Books.title, Books.Borrower, Borrower.firstname " +
+                //    "from Books" +
+                //    "inner join Borrowers on Books.Borrower = Borrower.id" +
+                //    "where Books.borrower is not null";
                 cmd = new SqlCommand(query, conn);
 
                 //read the data for that command
@@ -36,11 +45,20 @@ namespace WebApplication1.Controllers
                 //int borrowCheck = i ?? 0;
                 //while ((rdr.Read()) || (borrowCheck.))  
 
+
                 while (rdr.Read())
                 {
                     output.Add(new BooksModelBorrowed(Int32.Parse(rdr["ISBN"].ToString()),
                                                 rdr["title"].ToString(),
-                                                Int32.Parse(rdr["borrower"].ToString())));
+                                                Int32.Parse(rdr["id"].ToString()),
+                                                rdr["surname"].ToString(),
+                                                rdr["firstname"].ToString(),
+                                                rdr["DOB"].ToString()));
+
+                    //output2.Add(new BorrowerModel(Int32.Parse(rdr["id"].ToString()),
+                    //                            rdr["surname"].ToString(),
+                    //                            rdr["firstname"].ToString(),
+                    //                            rdr["DOB"].ToString()));
 
                 }
             }
